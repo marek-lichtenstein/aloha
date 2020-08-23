@@ -243,8 +243,8 @@ class Queries:
 		safest_pwds = []
 		while True:
 			pwd = sorted_pwds.pop()
-			if pwd.pwd_strength >= max_val:
-				max_val = pwd.pwd_strength
+			if pwd.strength >= max_val:
+				max_val = pwd.strength
 				safest_pwds.append(pwd)
 				continue
 			break	
@@ -260,7 +260,7 @@ class Queries:
 	
 	@staticmethod
 	def safest(results):
-		return "\n".join(f'{pwd}({pwd.pwd_strength})' for pwd in Queries.only_safest(results))
+		return "\n".join(f'{pwd}({pwd.strength})' for pwd in Queries.only_safest(results))
 
 
 class DbInterface:
