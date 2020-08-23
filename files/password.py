@@ -60,8 +60,11 @@ class CharCreator:
 	@staticmethod
 	def create(chars):
 		for char in chars:
-			char_obj, rank = CharCreator.char_map.get(char, (OtherChar, 0))
-			yield char_obj(char, rank)
+			if isinstance(char, str):
+				char_obj, rank = CharCreator.char_map.get(char, (OtherChar, 0))
+				yield char_obj(char, rank)
+			else:
+				raise ValueError("Not a string character in a password!")
 
 
 class Strength(set):
@@ -87,8 +90,13 @@ class Strength(set):
 class Pwd(Strength):
 	def __init__(self, pwd):
 		super().__init__()
-		self._password = [self.count_char(char) for char in CharCreator.create(pwd)]
-		self._strength = self._get_strength()
+		try:
+			self._password = [self.count_char(char) for char in CharCreator.create(pwd)]
+		except ValueError as err:
+			# log err
+			self._strength = 0
+		else:
+			self._strength = self._get_strength()
 
 	def __repr__(self):
 		return "".join(map(str, self.password))
