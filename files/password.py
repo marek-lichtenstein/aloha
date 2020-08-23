@@ -51,8 +51,8 @@ class OtherChar(PwdChr):
 
 class CharCreator:
 	char_map = {
-		**dict.fromkeys(ascii_lowercase, (LowerCase, 1)),
-		**dict.fromkeys(ascii_uppercase, (UpperCase, 2)),
+		**dict.fromkeys(ascii_lowercase, (Lowercase, 1)),
+		**dict.fromkeys(ascii_uppercase, (Uppercase, 2)),
 		**dict.fromkeys(punctuation, (SpecialChar, 3)),
 		**dict.fromkeys(digits, (Digit, 1))
 		}
